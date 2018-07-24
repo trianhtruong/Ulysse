@@ -18,17 +18,20 @@ def getLinksFromUrl(url):
 
 # Improved version that get links but also translate them into absolute urls.
 
-def getLinksFromUrlAndAddHttp(url):
-	with open("links.txt", "w") as links:
+def getLinksFromUrlAndAddHttp(url, domain):
+	with open("links.txt", "a") as links:
 		response = urllib.request.urlopen(url)
 		soup = BeautifulSoup(response, "lxml")
+		# ca ne fonctionne plus a partir de profondeur 1
 		for i in soup.find_all("a", href = True):
 			if i['href'].startswith('h'):
 				links.write(i['href'] + "\n")
 			elif i['href'].startswith('/'):
-				links.write(url + i['href'] + "\n")
+				links.write(domain + i['href'] + "\n")
 			else:
-				links.write(i['href'] + '\n')
+				#links.write(i['href'] + '\n')
+				#links.write("") # test pour voir si cette ligne est jamais utilisee... ?
+				pass # car ca perturbe la lecture ailleurs... pour etre remis quand la gestion des erreurs aura été implementee... ?
 
 # Pretty self explanatory. Get the robots.txt file if it exists.
 # To be used later (to write : polite and impolite mode)
