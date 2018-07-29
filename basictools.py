@@ -29,11 +29,11 @@ def getLinksFromUrlAndAddHttp(url, domain):
 			elif i['href'].startswith('/'):
 				links.write(domain + i['href'] + "\n")
 			else:
-				#links.write(i['href'] + '\n')
+				links.write(i['href'] + '\n')
 				#links.write("") # test pour voir si cette ligne est jamais utilisee... ?
-				pass # car ca perturbe la lecture ailleurs... pour etre remis quand la gestion des erreurs aura été implementee... ?
+				# pass # car ca perturbe la lecture ailleurs... pour etre remis quand la gestion des erreurs aura été implementee... ?
 
-# Pretty self explanatory. Get the robots.txt file if it exists.
+# Get the robots.txt file if it exists.
 # To be used later (to write : polite and impolite mode)
 
 def getRobotsTxt(url):
@@ -42,7 +42,7 @@ def getRobotsTxt(url):
 		soup = BeautifulSoup(response, "lxml")
 		robotsTxt.write(soup.get_text())
 
-# Download an html page and save it in an htlm file.
+# Download an html page and save it in an html file.
 # Amelioration to write : Save the results as different file names.
 
 def download_html(url):
@@ -58,6 +58,7 @@ def download_html_as_txt(url):
 		response = urllib.request.urlopen(url)
 		soup = BeautifulSoup(response)
 		file_txt.write(soup.prettify())
+
 
 # ========================================================================
 # TO DO LIST :
